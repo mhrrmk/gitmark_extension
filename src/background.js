@@ -22,6 +22,7 @@ db.defaults({})
 chrome.tabs.onCreated.addListener((tab)=>{
   console.log("A new tab created! id:", tab.id)
   db.set(`${tab.id}.opened`, true).write()
+  db.set(`${tab.id}.links`, []).write()
   //console.log("db!!!!!", db.get((tab.id).toString()).value())
 })
 chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
@@ -40,6 +41,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
     // if(tab.status === "complete"){
     console.log("Tab changed! id:", tabId, "url: ", changeInfo.url)
     db.set(`${tabId}.changed`, true).write()
+    db.get(`${tabId}.links`).push(changeInfo.url).write()
   }
 })
 

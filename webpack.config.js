@@ -2,8 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    background: './background.js',
-    ui: './ui.js'
+    background: './src/background.js',
+    ui: './src/ui/ui.js'
   },
   output: {
     filename: '[name].js',

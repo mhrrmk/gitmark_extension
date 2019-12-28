@@ -5,4 +5,4 @@ const adapter = new LocalStorage('db')
 //const adapter = new FileSync('db.json')
 const db = low(adapter)
 
-console.log("db from test.js", db.get('posts').value())
+console.log("db from test.js", db.value())
