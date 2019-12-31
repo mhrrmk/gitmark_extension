@@ -2,12 +2,11 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    background: './src/background.js',
-    ui: './src/ui/ui.js'
+    background: './src/backend/background.js',
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dev/backend'),
   },
 };
 

@@ -1,0 +1,69 @@
+.tabs-nav {
+    display: flex;
+    flex: 1 1 auto
+}
+
+.tab-types-options {
+     flex: 1
+}
+
+.commit-point {
+    display: flex;
+    margin: 20px
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 5;
+    margin: 5px
+}
+
+.content-expanded {
+    flex: 4;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.details-button {
+    /* flex: 1; */
+    background: whitesmoke;
+    margin: 5px
+}
+
+.tab {
+    flex: 1 1 auto;
+    margin: 5px
+}
+
+.tab-mod {
+    display: flex;
+    flex-direction: row
+}
+
+.tab-button {
+    min-width: 0;
+    width: 0
+}
+
+.indicator-button {
+    flex: 1;
+    height: 5px;
+}
+
+.bg-green {
+    background-color: green
+}
+
+.bg-orange {
+    background-color: orange
+}
+
+.bg-red {
+    background-color: red
+}
+
+.bg-blue {
+    background-color: blue
+}

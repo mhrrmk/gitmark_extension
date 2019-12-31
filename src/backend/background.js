@@ -21,6 +21,7 @@ db.defaults({})
 
 chrome.tabs.onCreated.addListener((tab)=>{
   console.log("A new tab created! id:", tab.id)
+  db.set(`${tab.id}.index`, tab.index).write()
   db.set(`${tab.id}.opened`, true).write()
   db.set(`${tab.id}.links`, []).write()
   //console.log("db!!!!!", db.get((tab.id).toString()).value())
@@ -45,6 +46,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
   }
 })
 
-chrome.browserAction.onClicked.addListener((tab)=>{
-  console.log("browserAction clicked")
-})
+// no need if there is a popup
+// chrome.browserAction.onClicked.addListener((tab)=>{
+//   console.log("browserAction clicked")
+// })

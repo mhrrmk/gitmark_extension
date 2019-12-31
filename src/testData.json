@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "Tab1longtitleohyeah",
+        "links": ["asdf", "qwerty"],
+        "opened": true
+    },
+    {
+        "id": 2,
+        "title": "Tab2",
+        "links": ["a.com", "b.com", "c.com"],
+        "closed": true,
+        "changed": true
+    },
+    {
+        "id": 3,
+        "title": "TabX",
+        "links": ["aaaaaa.com", "bbbbbb.com", "ccc.com"],
+        "opened": true,
+        "closed": true,
+        "changed": true
+    }
+]

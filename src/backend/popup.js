@@ -12,5 +12,5 @@ query.onclick = function(element) {
     });
   };
 go.onclick = (element)=>{
-  chrome.tabs.create({url: "src/ui/ui.html"}, (tab)=>{})
+  chrome.tabs.create({url: "../index.html"}, (tab)=>{})
 }

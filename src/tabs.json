@@ -1,0 +1,15 @@
+[
+    {
+        "id": 0,
+        "title": "Tab1longtitleohyeah",
+        "visiteds": ["asdf", "qwerty"],
+        "opened": true
+    },
+    {
+        "id": 1,
+        "title": "Tab2",
+        "visiteds": ["a.com", "b.com", "c.com"],
+        "closed": true,
+        "changed": true
+    }
+]
