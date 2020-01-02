@@ -17,8 +17,8 @@
     "start": "react-scripts start",
     "dev": "npm-run-all --parallel dev:* postdev",
     "dev:ui": "cra-build-watch -b dev",
-    "dev:backend": "webpack --config webpack.config.dev.js --watch",
-    "postdev": "rsync -av src/backend dev --exclude background.js",
+    "dev:backend": "webpack --config config/webpack.config.dev.js --watch",
+    "postdev": "rsync -av src/backend dev --exclude-from 'config/exclude_from.txt'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
