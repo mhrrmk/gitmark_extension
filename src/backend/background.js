@@ -20,7 +20,7 @@ chrome.tabs.onCreated.addListener((tab)=>{
   console.log("A new tab created! id:", tab.id)
 
   // save tab to DB
-  // tab is not tagged with "opened" here because no address is visited yet
+  // tab isn't tagged with "opened" here because no address is visited yet
   db.get("changes")
     .push({
       id: tab.id,
@@ -61,10 +61,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
     if(links.value().length === 0){
       dbTab.assign({opened: true})
            .write()
+
     // if there was at least one item on links that means tab is used
     // for another address so now tab can
-    // be tagged with "changed" because
-    // first visit on a tab doesn't qualify for change
+    // be tagged with "changed"
+    // first visit doesn't add closed tag because
+    // it doesn't qualify for change
     }else{
       dbTab.assign({changed: true})
            .write()
@@ -72,13 +74,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
 
     // save visited url
     links.push(changeInfo.url).write()
-    
-    // db.get("changes")
-    // .find({id: tabId})
-    // .assign({changed: true})
-    // .get("links")
-    // .push(changeInfo.url)
-    // .write()
 
     // db.set(`${tabId}.changed`, true).write()
     // db.get(`${tabId}.links`).push(changeInfo.url).write()
