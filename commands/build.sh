@@ -1,4 +1,12 @@
 #!/bin/bash
 
-cp -r mainpage/build/ build/mainpage
-cp -r popup/build/ build/popup
+#backend build
+# cd backend/
+# npm run build
+
+for dir in backend/ mainpage/ popup/
+do
+    cd ${dir}
+    npm run build
+    cd ..
+done

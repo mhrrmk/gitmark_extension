@@ -16,6 +16,18 @@ db.defaults({
   commits: []
 }).write()
 
+// !!!!NOT TESTED
+const updateIndexes = () => {
+  chrome.tabs.query({}, (tabs)=>{
+    tabs.forEach(tab => {
+      db.get("changes")
+        .find({id: tab.id})
+        .assign({index: tab.index})
+        .write()
+    });
+  })
+}
+
 chrome.tabs.onCreated.addListener((tab)=>{
   console.log("A new tab created! id:", tab.id)
 
@@ -39,6 +51,10 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
     .assign({closed: true})
     .write()
 
+  // TODO: update tab indexes
+  // !!!NOT TESTED 
+  updateIndexes()
+
   // tab no longer exists at this point
   // this will return Unchecked runtime.lastError: No tab with id: [tabId]
   // chrome.tabs.get(tabId, function(tab){
@@ -46,6 +62,9 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
   // })
 })
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
+
+  // TODO: update tab indexes if this changed its index
+  // chrome.tabs.onMoved
 
   // find tab from localStotrage DB
   let dbTab = db.get("changes").find({id: tabId})
@@ -78,6 +97,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
     // db.set(`${tabId}.changed`, true).write()
     // db.get(`${tabId}.links`).push(changeInfo.url).write()
   }
+})
+
+chrome.tabs.onMoved.addListener((tabId, moveInfo)=>{
+  updateIndexes()
 })
 
 // no need if there is a popup
