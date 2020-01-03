@@ -1,0 +1,19 @@
+{
+  "name": "gitmark_extension",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mhrrmk/gitmark_extension.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mhrrmk/gitmark_extension/issues"
+  },
+  "homepage": "https://github.com/mhrrmk/gitmark_extension#readme"
+}
