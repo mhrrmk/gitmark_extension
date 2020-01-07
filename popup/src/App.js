@@ -4,12 +4,15 @@ import './App.css';
 import low from 'lowdb';
 import LocalStorage from 'lowdb/adapters/LocalStorage';
 
+console.log("popup!!!!!!!!!!!!!")
+
 const adapter = new LocalStorage('db')
 //const adapter = new FileSync('db.json')
 const db = low(adapter)
 
 // [changes] field from DB
 let changes = db.get("changes")
+let commits = db.get("commits")
 
 const commitOnClick = () => {
   // this button will save changes as a commit and then
@@ -17,6 +20,7 @@ const commitOnClick = () => {
   console.log("committed:)")
 
   // TODO: save current changes as a commit to commits in DB
+  commits.push(changes.value()).write()
 
   // delete closed tabs
   changes.remove({closed: true}).write()
@@ -28,11 +32,16 @@ const commitOnClick = () => {
   }).write()
 }
 
+const goToMainpage = () => {
+  console.log("going tot mainpage")
+  chrome.tabs.create({url: "../mainpage/index.html"}, (tab)=>{})
+}
+
 function App() {
   return (
     <div className="App">
       <button
-        onClick={()=>{chrome.tabs.create({url: "../mainpage/index.html"}, (tab)=>{})}}
+        onClick={goToMainpage}
         >mainpage
       </button>
       <button

@@ -63,9 +63,6 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
 })
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
 
-  // TODO: update tab indexes if this changed its index
-  // chrome.tabs.onMoved
-
   // find tab from localStotrage DB
   let dbTab = db.get("changes").find({id: tabId})
 

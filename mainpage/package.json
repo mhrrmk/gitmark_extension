@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "/mainpage",
   "dependencies": {
+    "lowdb": "^1.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
@@ -12,6 +13,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "cp -r build/ ../build/mainpage",
+    "watch": "cra-build-watch -v -b ../watch/mainpage",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -29,5 +31,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cra-build-watch": "^3.0.0"
   }
 }

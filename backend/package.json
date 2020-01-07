@@ -4,9 +4,19 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"backend build\""
+    "build": "npx webpack --config config/webpack.config.build.js",
+    "postbuild": "cp -r -t ../build/backend src/options.* images",
+    "prewatch": "cp -r -t ../watch/backend src/options.* images",
+    "watch": "npx webpack --config config/webpack.config.watch.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "lowdb": "^1.0.0"
+  }
 }
