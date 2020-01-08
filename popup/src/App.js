@@ -33,7 +33,7 @@ const commitOnClick = () => {
   // let changes = db.get("changes")
   // let commits = db.get("commits")
 
-  // TODO: save current changes as a commit to commits in DB
+  // save current changes as a commit to commits in db
   db.get("commits")
     .push(db.get("changes")
             .cloneDeep()
@@ -53,7 +53,7 @@ const commitOnClick = () => {
 }
 
 const goToMainpage = () => {
-  console.log("going tot mainpage")
+  console.log("going to mainpage")
   chrome.tabs.create({url: "../mainpage/index.html"}, (tab)=>{})
 }
 

@@ -42,22 +42,31 @@ chrome.tabs.onCreated.addListener((tab)=>{
       links: []
     })
     .write()
-  //console.log("db!!!!!", db.get((tab.id).toString()).value())
+
+  // update is required especially because of ctrl + shift + T
+  updateIndexes()
 })
 
 chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
   console.log("A tab closed! Id:", tabId)
+  //console.log("Date.now():", Date.now())
 
+  // update the db to operate on its latest state
   db.read()
 
+  // tag with closed
+  // add closingTime
   db.get("changes")
     .find({id: tabId})
-    .assign({closed: true})
+    .assign({
+      closed: true,
+      closedTime: Date.now()
+    })
     .write()
 
-  // TODO: update tab indexes
-  // since a closed tab continues to be monitored, update is actually unnecessary
-  // updateIndexes()
+  // update tab indexes
+  // Revisited: since a closed tab continues to be monitored, update is actually unnecessary
+  updateIndexes()
 
   // tab no longer exists at this point
   // this will return Unchecked runtime.lastError: No tab with id: [tabId]
@@ -72,11 +81,14 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
   db.read()
 
   let changes = db.get("changes")
+
   // find tab from localStotrage DB
   let dbTab = changes.find({id: tabId})
 
+  // operate on the tab only if its status is completed thus has a url
+  // and that url is a webpage rather than browser specific pages
+  // for example extensions or settings
   if(changeInfo.url && changeInfo.url.startsWith("http")){
-    console.log("Tab changed! id:", tabId, "url: ", changeInfo.url)
 
     // get the links field from tab
     let links = dbTab.get("links")
@@ -84,24 +96,23 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
     // if links is empty it means the tab wasn't used to go to a site
     // but now it is going so tab can be tagged with "opened"
     if(links.value().length === 0){
+      console.log("Tab used for the first time! id:", tabId, "url: ", changeInfo.url)
       dbTab.assign({opened: true})
            .write()
 
     // if there was at least one item on links that means tab is used
     // for another address so now tab can
     // be tagged with "changed"
-    // first visit doesn't add closed tag because
+    // first visit doesn't add changed tag because
     // it doesn't qualify for change
     }else{
+      console.log("Tab changed! id:", tabId, "url: ", changeInfo.url)
       dbTab.assign({changed: true})
            .write()
     }
 
     // save visited url
     links.push(changeInfo.url).write()
-
-    // db.set(`${tabId}.changed`, true).write()
-    // db.get(`${tabId}.links`).push(changeInfo.url).write()
   }
 })
 
