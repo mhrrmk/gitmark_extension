@@ -11,25 +11,45 @@ const adapter = new LocalStorage('db')
 const db = low(adapter)
 
 // [changes] field from DB
-let changes = db.get("changes")
-let commits = db.get("commits")
+// let changes = db.get("changes")
+// let commits = db.get("commits")
+
+const updateIndexes = () => {
+  chrome.tabs.query({}, (tabs)=>{
+    tabs.forEach(tab => {
+      db.get("changes")
+        .find({id: tab.id})
+        .assign({index: tab.index})
+        .write()
+    });
+  })
+}
 
 const commitOnClick = () => {
   // this button will save changes as a commit and then
   // reset it
   console.log("committed:)")
 
+  // let changes = db.get("changes")
+  // let commits = db.get("commits")
+
   // TODO: save current changes as a commit to commits in DB
-  commits.push(changes.value()).write()
+  db.get("commits")
+    .push(db.get("changes")
+            .cloneDeep()
+            .value())
+    .write()
 
   // delete closed tabs
-  changes.remove({closed: true}).write()
+  db.get("changes").remove({closed: true}).write()
 
   // reset the fields
-  changes.each(tab => {
+  db.get("changes").each(tab => {
     tab.opened = false
     tab.changed = false
   }).write()
+
+  updateIndexes()
 }
 
 const goToMainpage = () => {

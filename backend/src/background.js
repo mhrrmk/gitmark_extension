@@ -16,7 +16,6 @@ db.defaults({
   commits: []
 }).write()
 
-// !!!!NOT TESTED
 const updateIndexes = () => {
   chrome.tabs.query({}, (tabs)=>{
     tabs.forEach(tab => {
@@ -30,6 +29,9 @@ const updateIndexes = () => {
 
 chrome.tabs.onCreated.addListener((tab)=>{
   console.log("A new tab created! id:", tab.id)
+
+  // update the db to operate on its latest state
+  db.read()
 
   // save tab to DB
   // tab isn't tagged with "opened" here because no address is visited yet
@@ -46,14 +48,16 @@ chrome.tabs.onCreated.addListener((tab)=>{
 chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
   console.log("A tab closed! Id:", tabId)
 
+  db.read()
+
   db.get("changes")
     .find({id: tabId})
     .assign({closed: true})
     .write()
 
   // TODO: update tab indexes
-  // !!!NOT TESTED 
-  updateIndexes()
+  // since a closed tab continues to be monitored, update is actually unnecessary
+  // updateIndexes()
 
   // tab no longer exists at this point
   // this will return Unchecked runtime.lastError: No tab with id: [tabId]
@@ -61,10 +65,15 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
   //   console.log("tab:", tab);
   // })
 })
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
 
+  // update the db to operate on its latest state
+  db.read()
+
+  let changes = db.get("changes")
   // find tab from localStotrage DB
-  let dbTab = db.get("changes").find({id: tabId})
+  let dbTab = changes.find({id: tabId})
 
   if(changeInfo.url && changeInfo.url.startsWith("http")){
     console.log("Tab changed! id:", tabId, "url: ", changeInfo.url)
@@ -97,6 +106,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
 })
 
 chrome.tabs.onMoved.addListener((tabId, moveInfo)=>{
+  db.read()
   updateIndexes()
 })
 
