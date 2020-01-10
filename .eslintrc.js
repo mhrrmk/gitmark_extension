@@ -3,5 +3,5 @@ module.exports = {
         "browser": true,
         "es6": true
     },
-    "extends": ["react-app","google", "eslint:recommended"]
+    "extends": ["react-app"]
 }
