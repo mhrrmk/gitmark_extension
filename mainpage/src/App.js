@@ -2,6 +2,7 @@ import React from 'react';
 import "./App.css";
 import { CommitPoint } from "./components"
 import testData from "./testData.json"
+import exampleCommits from "./exampleCommits.json"
 import low from 'lowdb';
 import LocalStorage from 'lowdb/adapters/LocalStorage';
 
@@ -17,10 +18,11 @@ function App() {
   return (
       <ul>
         {
-          commits.map((commit)=>(
+          commits.reverse().map((commit)=>(
             <CommitPoint tabs={commit} ></CommitPoint>
           ))
         }
+        {/* <CommitPoint tabs={exampleCommits[0]}/> */}
           {/* <CommitPoint tabs={testData} >
           </CommitPoint>
           <CommitPoint tabs={testData} >
