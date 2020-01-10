@@ -27,6 +27,42 @@ const updateIndexes = () => {
   })
 }
 
+// chrome.runtime.onStartup.addListener(()=>{
+//   chrome.tabs.query({}, (tabs)=>{
+//     tabs.forEach(tab=>{
+//       db.get("changes")
+//         .push({
+//           id: tab.id,
+//           index: tab.index,
+//           title: tab.title,
+//           links: [(tab.url)],
+//           active: tab.active
+//         })
+//         .write()
+//     })
+//   })
+// })
+
+chrome.runtime.onInstalled.addListener((details)=>{
+
+  db.set("changes", []).write()
+  db.set("commits", []).write()
+
+  chrome.tabs.query({}, (tabs)=>{
+    tabs.forEach(tab=>{
+      db.get("changes")
+        .push({
+          id: tab.id,
+          index: tab.index,
+          title: tab.title,
+          links: [(tab.url)],
+          active: tab.active
+        })
+        .write()
+    })
+  })
+})
+
 chrome.tabs.onCreated.addListener((tab)=>{
   console.log("A new tab created! id:", tab.id)
 
@@ -39,6 +75,8 @@ chrome.tabs.onCreated.addListener((tab)=>{
     .push({
       id: tab.id,
       index: tab.index,
+      title: tab.title,
+      // active: tab.active,
       links: []
     })
     .write()
@@ -76,6 +114,7 @@ chrome.tabs.onRemoved.addListener((tabId, removeInfo)=>{
 })
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
+  //console.log("Tab: ", tab)
 
   // update the db to operate on its latest state
   db.read()
@@ -88,7 +127,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
   // operate on the tab only if its status is completed thus has a url
   // and that url is a webpage rather than browser specific pages
   // for example extensions or settings
-  if(changeInfo.url && changeInfo.url.startsWith("http")){
+  if(tab.status === "complete" && tab.url.startsWith("http")){
 
     // get the links field from tab
     let links = dbTab.get("links")
@@ -96,7 +135,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
     // if links is empty it means the tab wasn't used to go to a site
     // but now it is going so tab can be tagged with "opened"
     if(links.value().length === 0){
-      console.log("Tab used for the first time! id:", tabId, "url: ", changeInfo.url)
+      console.log("Tab used for the first time! id:", tabId, "url: ", tab.url)
       dbTab.assign({opened: true})
            .write()
 
@@ -111,14 +150,30 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab)=>{
            .write()
     }
 
+    dbTab.assign({title: tab.title}).write()
+
     // save visited url
-    links.push(changeInfo.url).write()
+    links.push(tab.url).write()
   }
 })
 
 chrome.tabs.onMoved.addListener((tabId, moveInfo)=>{
   db.read()
   updateIndexes()
+})
+
+chrome.tabs.onActivated.addListener((activeInfo)=>{
+  console.log("Active Tab changed id:", activeInfo.tabId)
+
+  db.get("changes")
+    .find({active: true})
+    .assign({active: false})
+    .write()
+
+  db.get("changes")
+    .find({id: activeInfo.tabId})
+    .assign({active: true})
+    .write()
 })
 
 // no need if there is a popup
