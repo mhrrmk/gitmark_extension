@@ -27,6 +27,7 @@ export function Tabs({options, tabs}){
 
     return (
         <nav className="tabs-nav">
+            <div className="tabs">
             {
                 tabsToShow.map(tab => (
                     <Tab
@@ -34,9 +35,11 @@ export function Tabs({options, tabs}){
                     tab={tab}
                     active={tab.id === activeTab}
                     onClick={()=>{setActiveTab(tab.id)}}
+                    expanded={options.expanded}
                     />
                 ))
             }
+            </div>
             <TabsPanel
             tabs={tabsToShow}
             activeTab={activeTab}

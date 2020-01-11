@@ -44,7 +44,7 @@ export function CommitPoint({tabs}){
             <Options
             handleToggle={(id)=>dispatch([actions.TOGGLE_OPTION, {id: id}])}
             {...state.show}
-            expanded
+            expanded={state.expanded}
             />
         </li>
     )

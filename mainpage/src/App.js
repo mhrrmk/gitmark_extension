@@ -17,11 +17,11 @@ function App() {
   
   return (
       <ul>
-        {/* {
-          commits.reverse().map((commit)=>(
-            <CommitPoint tabs={commit} ></CommitPoint>
+        {
+          commits.reverse().map((commit, index)=>(
+            <CommitPoint key={index} tabs={commit} ></CommitPoint>
           ))
-        } */}
+        }
 
         {
           //test with multiple commits data
@@ -33,7 +33,7 @@ function App() {
         
         {
         // test with single commit data
-        <CommitPoint tabs={exampleCommits[0]}/>
+        // <CommitPoint tabs={exampleCommits[0]}/>
         }
       </ul>
   );
