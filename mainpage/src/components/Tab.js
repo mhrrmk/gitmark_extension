@@ -1,15 +1,20 @@
 import React from "react"
+import {Indicator} from "./Indicator"
 
 //Receives a [ModificationIndicator] as children
-export function Tab({active, title, onClick, ...props}){
+export function Tab({active, tab, onClick, expanded}){
+
+    const {opened, changed, closed} = tab
     //console.log("[Tab] props: ", props)
+
     return (
         <div className={"tab" + (active ? " active" : "")} >
-            {props.children}
+            {expanded &&
+            <Indicator opened={opened} changed={changed} closed={closed} />}
             <button
                 className="tab-button"
                 onClick={onClick}
-            >{title}
+            >{tab.title}
             </button>
         </div>
     )
