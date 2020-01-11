@@ -36,7 +36,7 @@ export function CommitPoint({tabs}){
             />
             <Tabs
             options={state}
-            tabs={tabs}
+            tabs={sortedTabs}
             />
             <Options
             handleToggle={(id)=>dispatch([actions.TOGGLE_OPTION, {id: id}])}

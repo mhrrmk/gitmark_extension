@@ -17,7 +17,7 @@ export function getLinksOfActive_tab(tabs, activeTab){
 }
 
 // filters a collection of tabs based on options
-export function getShownTabs({opened, closed, changed, unchanged}, tabs){
+export function getTabsByOptions({opened, closed, changed, unchanged}, tabs){
     return tabs.filter(tab => {
         if (
             (opened && tab.opened) ||

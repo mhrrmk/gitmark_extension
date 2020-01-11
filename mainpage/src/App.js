@@ -25,14 +25,16 @@ function App() {
 
         {
           //test with multiple commits data
-          exampleCommits.map((commit, index)=>(
-            <CommitPoint key={index} tabs={commit} ></CommitPoint>
-          ))
+          // exampleCommits.map((commit, index)=>(
+          //   <CommitPoint key={index} tabs={commit} ></CommitPoint>
+          // ))
         }
 
         
-        {// test with single commit data
-        /* <CommitPoint tabs={exampleCommits[0]}/> */}
+        {
+        // test with single commit data
+        <CommitPoint tabs={exampleCommits[0]}/>
+        }
       </ul>
   );
 }
