@@ -1,6 +1,6 @@
 import React, {useMemo} from "react"
 
-export function Indicator({opened, closed, changed}){
+export function Indicator(opened, closed, changed){
     //console.log("[ModificationIndicator] props: ", props)
     const indicator = useMemo(() => {
         let colors = []
@@ -22,6 +22,5 @@ export function Indicator({opened, closed, changed}){
 
     return indicator
 }
-
-export function coloredArea(color){
-    return (<div key={color} className={"indicator-button bg-" + color} />)}
+const coloredArea = (color) => (
+    <div key={color} className={"indicator-button bg-" + color} />)
