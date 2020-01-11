@@ -2,7 +2,7 @@
 // returns links of the active tab in a given set of tabs
 // returns empty if the active tab is not in the given tabs or...
 // ...the given list of tabs is empty
-export function get_links_of_active_tab(tabs, activeTab){
+export function getLinksOfActive_tab(tabs, activeTab){
     if (Object.keys(tabs).length===0){
         return ["no tabs shown"]
     }
@@ -17,7 +17,7 @@ export function get_links_of_active_tab(tabs, activeTab){
 }
 
 // filters a collection of tabs based on options
-export function get_shown_tabs({opened, closed, changed, unchanged}, tabs){
+export function getShownTabs({opened, closed, changed, unchanged}, tabs){
     return tabs.filter(tab => {
         if (
             (opened && tab.opened) ||
@@ -28,5 +28,26 @@ export function get_shown_tabs({opened, closed, changed, unchanged}, tabs){
             return true
         }
         return false
+    })
+}
+
+export function getTabsWhenUnexpanded(tabs){
+    return tabs.filter(tab=>{
+        return tab.closed !== true
+    })
+}
+
+export function sortTabs(tabs){
+    return [...tabs].sort((f, s)=>{
+        if(f.index !== s.index){
+            return f.index < s.index
+        }
+        if(f.closed && s.closed){
+            return f.closedTime - s.closedTime
+        }
+        if(f.closed){
+            return -1
+        }
+       return 1
     })
 }

@@ -1,6 +1,6 @@
 import React from "react"
 
-export function  DetailsButton({onClick}){
+export function  ExpandButton({onClick}){
     return (
         <button
             className="details-button"
