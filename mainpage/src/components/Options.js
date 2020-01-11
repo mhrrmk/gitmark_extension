@@ -1,6 +1,6 @@
 import React from "react";
 
-export function TabTypesOption({opened, closed, changed, unchanged, handleToggle}){
+export function Options({opened, closed, changed, unchanged, handleToggle}){
     return(
         <ul className="tab-types-options">
             <li>
