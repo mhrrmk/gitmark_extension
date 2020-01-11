@@ -1,10 +1,15 @@
 .tabs-nav {
     display: flex;
-    flex: 1 1 auto
+    flex-direction: column;
+    flex: 1
 }
 
 .tab-types-options {
      flex: 1
+}
+
+.tabs {
+    display: flex;
 }
 
 .commit-point {
@@ -12,29 +17,17 @@
     margin: 20px
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    flex: 5;
-    margin: 5px
-}
-
-.content-expanded {
-    flex: 4;
-    margin: 5px;
-    display: flex;
-    flex-direction: column;
-}
-
 .details-button {
-    /* flex: 1; */
+    flex: 1;
     background: whitesmoke;
-    margin: 5px
+    margin: 5px;
+    width: fit-content;
 }
 
 .tab {
     flex: 1 1 auto;
-    margin: 5px
+    margin: 1px;
+    max-width: 150px;
 }
 
 .tab-mod {
@@ -44,7 +37,7 @@
 
 .tab-button {
     min-width: 0;
-    width: 0
+    max-width: 150px;
 }
 
 .indicator-button {

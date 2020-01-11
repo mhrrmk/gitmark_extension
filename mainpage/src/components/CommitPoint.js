@@ -8,6 +8,9 @@ export function CommitPoint({tabs}){
     //const [state, dispatch] = useReducer(reducer, initialState)
     const [state, actions, dispatch] = useCommitPointState()
 
+    // tabs will have elements with identical index fields.
+    // this will sort those looking at closed and closingTime fields.
+    // from this point on indexes of generated array will be used to identify elements
     const sortedTabs = sortTabs(tabs)
     console.log("sortedTabs:", sortedTabs)
 
@@ -36,12 +39,12 @@ export function CommitPoint({tabs}){
             />
             <Tabs
             options={state}
-            tabs={tabs}
+            tabs={sortedTabs}
             />
             <Options
             handleToggle={(id)=>dispatch([actions.TOGGLE_OPTION, {id: id}])}
             {...state.show}
-            expanded
+            expanded={state.expanded}
             />
         </li>
     )
