@@ -1,7 +1,7 @@
 import React, {useMemo} from "react"
 
-export function Indicator(opened, closed, changed){
-    //console.log("[ModificationIndicator] props: ", props)
+export function Indicator({opened, closed, changed}){
+    console.log("[Indicator] props: ", opened, changed, closed)
     const indicator = useMemo(() => {
         let colors = []
         if (!(opened || closed || changed)){
