@@ -7,13 +7,13 @@ In the project directory, you can run:
 
 ### `npm run watch`
 
-Runs the app in the development mode. Builds to dev folder and watches for changes. Dev folder can be loaded as the extension.
+Runs the app in the development mode. Builds to dev directory and watches for changes. Dev folder can be loaded as the extension.
 
 ### `npm run build`
 
-Same as watch but without watch. Adds further optimization.
+Same as watch but without watch. Builds to build directory. Adds further optimization.
 
-React projects keep their original commands in their own folder. They can run in there as well. For example:
+React projects keep their original commands in their own folder. They can be run in there as well. For example:
 
 Go into mainpage and start development:
 
@@ -21,3 +21,10 @@ Go into mainpage and start development:
 ### `npm run start`
 
 This will start classical create-react-app development on localhost
+
+Loading the extension
+
+Open the Extension Management page by navigating to chrome://extensions.
+The Extension Management page can also be opened by clicking on the Chrome menu, hovering over More Tools then selecting Extensions.
+Enable Developer Mode by clicking the toggle switch next to Developer mode.
+Click the LOAD UNPACKED button and select the extension directory.

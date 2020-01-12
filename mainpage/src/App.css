@@ -25,9 +25,8 @@
 }
 
 .tab {
-    flex: 1 1 auto;
+    flex: 1 1 150px;
     margin: 1px;
-    max-width: 150px;
 }
 
 .tab-mod {
