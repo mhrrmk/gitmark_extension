@@ -6,12 +6,12 @@ const actions = {
 }
 
 const initialState = {
-    expanded: false,
+    expanded: true,
     show: {
         opened: true,
         closed: true,
         changed: true,
-        unchanged: true,
+        unchanged: false,
     }
 }
 

@@ -14,23 +14,6 @@ export function CommitPoint({tabs}){
     const sortedTabs = sortTabs(tabs)
     console.log("sortedTabs:", sortedTabs)
 
-    // const shownTabs = useMemo(()=>{
-    //     console.log("shownTabs calculated")
-    //     return get_shown_tabs(state.show, tabs)},
-    //     [state.show, tabs])
-
-    // const linksOfActiveTabInShownTabs = useMemo(
-    //     () => get_links_of_active_tab(shownTabs, state.activeTab),
-    //     [shownTabs, state.activeTab])
-
-    // const linksOfActiveTabInTabs = useMemo(
-    //     () => get_links_of_active_tab(tabs, state.activeTab),
-    //     [tabs, state.activeTab])
-
-    // const tabsToShow = state.expanded ? shownTabs : tabs
-
-    // const links = state.expanded ? linksOfActiveTabInShownTabs : linksOfActiveTabInTabs.slice(0, 1)
-
     return (
         <li className={"commit-point"} >
             <div className="settings">

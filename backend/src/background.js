@@ -17,6 +17,7 @@ db.defaults({
 }).write()
 
 const updateIndexes = () => {
+  db.read()
   chrome.tabs.query({}, (tabs)=>{
     tabs.forEach(tab => {
       db.get("changes")
@@ -164,6 +165,8 @@ chrome.tabs.onMoved.addListener((tabId, moveInfo)=>{
 
 chrome.tabs.onActivated.addListener((activeInfo)=>{
   console.log("Active Tab changed id:", activeInfo.tabId)
+
+  db.read()
 
   db.get("changes")
     .find({active: true})

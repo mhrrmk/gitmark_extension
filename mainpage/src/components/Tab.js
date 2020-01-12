@@ -1,7 +1,6 @@
 import React from "react"
 import {Indicator} from "./Indicator"
 
-//Receives a [ModificationIndicator] as children
 export function Tab({active, tab, onClick, expanded}){
 
     const {opened, changed, closed} = tab
