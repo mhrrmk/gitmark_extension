@@ -33,18 +33,20 @@ export function CommitPoint({tabs}){
 
     return (
         <li className={"commit-point"} >
-            <ExpandButton
-            expanded
-            onClick={()=>dispatch([actions.TOGGLE_EXPANDED])}
-            />
+            <div className="settings">
+                <ExpandButton
+                expanded={state.expanded}
+                onClick={()=>dispatch([actions.TOGGLE_EXPANDED])}
+                />
+                <Options
+                handleToggle={(id)=>dispatch([actions.TOGGLE_OPTION, {id: id}])}
+                {...state.show}
+                expanded={state.expanded}
+                />
+            </div>
             <Tabs
             options={state}
             tabs={sortedTabs}
-            />
-            <Options
-            handleToggle={(id)=>dispatch([actions.TOGGLE_OPTION, {id: id}])}
-            {...state.show}
-            expanded={state.expanded}
             />
         </li>
     )

@@ -11,7 +11,7 @@ const initialState = {
         opened: true,
         closed: true,
         changed: true,
-        unchanged: false,
+        unchanged: true,
     }
 }
 

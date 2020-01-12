@@ -9,8 +9,7 @@ export function Tab({active, tab, onClick, expanded}){
 
     return (
         <div className={"tab" + (active ? " active" : "")} >
-            {expanded &&
-            <Indicator opened={opened} changed={changed} closed={closed} />}
+            <Indicator opened={opened} changed={changed} closed={closed} expanded={expanded} />
             <button
                 className="tab-button"
                 onClick={onClick}

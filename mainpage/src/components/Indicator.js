@@ -1,7 +1,8 @@
 import React, {useMemo} from "react"
 
-export function Indicator({opened, closed, changed}){
+export function Indicator({opened, closed, changed, expanded}){
     //console.log("[Indicator] props: ", opened, changed, closed)
+
     const indicator = useMemo(() => {
         let colors = []
         if (!(opened || closed || changed)){
@@ -19,6 +20,10 @@ export function Indicator({opened, closed, changed}){
         }
         return (<div className="tab-mod">{colors}</div>)
     }, [opened, changed, closed])
+
+    if(!expanded){
+        return (<div className="tab-mod">{coloredArea("transparent")}</div>)
+    }
 
     return indicator
 }
