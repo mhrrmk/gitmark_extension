@@ -1,7 +1,8 @@
-import React from "react"
+import React, {useMemo} from "react"
 import {isThereSomethingToShow, isActiveTabInTabs, getLinks} from "../helpers/Helpers"
 
 export function TabsPanel({tabs, activeTab, expanded}){
+    //console.log("[TabsPanel] tabs:", tabs)
 
     if(!isThereSomethingToShow(tabs)){
         return (
@@ -15,11 +16,17 @@ export function TabsPanel({tabs, activeTab, expanded}){
         )
     }
 
-    const links = getLinks(tabs, activeTab)
+    // does not work
+    // const links = getLinks(tabs, activeTab).splice().reverse()
+    const links = [...getLinks(tabs, activeTab)].reverse()
+    console.log("links:", links)
+    const linksToShow = expanded ? links : [links[0]]
+    console.log("linksToShow:", linksToShow)
+
 
     return (
         <ul className="links">
-            {links.map((link, index) => (
+            {linksToShow.map((link, index) => (
             <li key={index}>
                 <a  href={link} >{link}</a>
             </li>))}
