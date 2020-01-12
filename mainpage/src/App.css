@@ -1,44 +1,68 @@
-.tabs-nav {
-    display: flex;
-    flex-direction: column;
-    flex: 1
-}
-
-.tab-types-options {
-     flex: 1
-}
-
-.tabs {
-    display: flex;
-}
-
+/* parent of settings and tabs */
 .commit-point {
     display: flex;
+    flex-direction: row;
     margin: 20px
 }
 
+/* parent of details-button and tab-types-options */
+.settings {
+    flex: none;
+    display: flex;
+    flex-direction: column;
+}
 .details-button {
-    flex: 1;
+    flex: none;
     background: whitesmoke;
-    margin: 5px;
-    width: fit-content;
+    margin: 2px;
+}
+.tab-types-options {
+    flex: 1
 }
 
+/* parent of tabs-nav and (links or show-nothing or no-activeTab */
+.tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+/* parent of tab with active */
+.tabs-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+/* parent of tab-mod and tab-button */
 .tab {
+<<<<<<< HEAD
     flex: 1 1 150px;
     margin: 1px;
+=======
+    flex: 1;
+    width: 0px;
+    max-width: 150px;
+    margin: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+>>>>>>> mainpage_components_redesign
 }
-
+.active > .tab-button{
+    border: 2px solid black;
+}
+.tab-button {
+    min-width: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* parent of indicator-button with bg-[color] */
 .tab-mod {
     display: flex;
     flex-direction: row
 }
-
-.tab-button {
-    min-width: 0;
-    max-width: 150px;
-}
-
 .indicator-button {
     flex: 1;
     height: 5px;
@@ -58,4 +82,17 @@
 
 .bg-blue {
     background-color: blue
+}
+.bg-transparent {
+    background-color: transparent;
+}
+
+.links{
+    flex: 1;
+}
+.show-nothing{
+    flex: 1;
+}
+.no-activeTab{
+    flex: 1;
 }
