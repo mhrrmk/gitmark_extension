@@ -2,19 +2,19 @@
 // returns links of the active tab in a given set of tabs
 // returns empty if the active tab is not in the given tabs or...
 // ...the given list of tabs is empty
-export function getLinksOfActiveTab(tabs, activeTab){
-    if (Object.keys(tabs).length===0){
-        return ["no tabs shown"]
-    }
-    const activeTabInList = tabs.filter(tab => {
-        if (tab.id===activeTab){return true}
-        return false
-    })
-    if (activeTabInList.length===0){
-        return ["active tab is not in shown tabs"]
-    }
-    return activeTabInList[0].links
-}
+// export function getLinksOfActiveTab(tabs, activeTab){
+//     if (Object.keys(tabs).length===0){
+//         return ["no tabs shown"]
+//     }
+//     const activeTabInList = tabs.filter(tab => {
+//         if (tab.id === activeTab){return true}
+//         return false
+//     })
+//     if (activeTabInList.length===0){
+//         return ["active tab is not in shown tabs"]
+//     }
+//     return activeTabInList[0].links
+// }
 
 // filters a collection of tabs based on options
 export function getTabsByOptions({opened, closed, changed, unchanged}, tabs){
@@ -31,12 +31,11 @@ export function getTabsByOptions({opened, closed, changed, unchanged}, tabs){
     })
 }
 
-export function getTabsWhenUnexpanded(tabs){
-    return tabs.filter(tab=>{
-        return tab.closed !== true
-    })
-}
+// exclude closed tabs
+export const getTabsWhenUnexpanded = tabs => tabs.filter(tab => tab.closed !== true)
 
+// if same index, put closed one before
+// if still same, put closed before, before
 export function sortTabs(tabs){
     return [...tabs].sort((f, s)=>{
         if(f.index !== s.index){
@@ -52,14 +51,8 @@ export function sortTabs(tabs){
     })
 }
 
-export const isThereSomethingToShow = (tabs) => {
-    return tabs.length !== 0
-}
+export const isThereSomethingToShow = tabs => tabs.length !== 0
 
-export const isActiveTabInTabs = (tabs, activeTab) => {
-    return tabs.some(tab => tab.id === activeTab)
-}
+export const isActiveTabInTabs = (tabs, activeTab) => tabs.some(tab => tab.id === activeTab)
 
-export const getLinks = (tabs, activeTab) => {
-    return tabs.find(tab => tab.id === activeTab).links
-}
+export const getLinks = (tabs, activeTab) => tabs.find(tab => tab.id === activeTab).links

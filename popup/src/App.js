@@ -15,6 +15,7 @@ const db = low(adapter)
 // let commits = db.get("commits")
 
 const updateIndexes = () => {
+  db.read()
   chrome.tabs.query({}, (tabs)=>{
     tabs.forEach(tab => {
       db.get("changes")
@@ -26,6 +27,9 @@ const updateIndexes = () => {
 }
 
 const commitOnClick = () => {
+  db.read()
+  console.log("db before:", db.__wrapped__)
+
   // this button will save changes as a commit and then
   // reset it
   console.log("committed:)")
@@ -50,6 +54,7 @@ const commitOnClick = () => {
   }).write()
 
   updateIndexes()
+  console.log("db after:", db.__wrapped__)
 }
 
 const goToMainpage = () => {

@@ -5,20 +5,20 @@ export function TabsPanel({tabs, activeTab, expanded}){
 
     if(!isThereSomethingToShow(tabs)){
         return (
-            <div>THERE IS NOTHING TO SHOW</div>
+            <div className="show-nothing">THERE IS NOTHING TO SHOW</div>
         )
     }
 
     if(!isActiveTabInTabs(tabs, activeTab)){
         return (
-            <div>ACTIVETAB IS NOT SHOWN</div>
+            <div className="no-activeTab">ACTIVETAB IS NOT SHOWN</div>
         )
     }
 
     const links = getLinks(tabs, activeTab)
 
     return (
-        <ul>
+        <ul className="links">
             {links.map((link, index) => (
             <li key={index}>
                 <a  href={link} >{link}</a>

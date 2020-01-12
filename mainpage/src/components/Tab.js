@@ -1,7 +1,6 @@
 import React from "react"
 import {Indicator} from "./Indicator"
 
-//Receives a [ModificationIndicator] as children
 export function Tab({active, tab, onClick, expanded}){
 
     const {opened, changed, closed} = tab
@@ -9,8 +8,7 @@ export function Tab({active, tab, onClick, expanded}){
 
     return (
         <div className={"tab" + (active ? " active" : "")} >
-            {expanded &&
-            <Indicator opened={opened} changed={changed} closed={closed} />}
+            <Indicator opened={opened} changed={changed} closed={closed} expanded={expanded} />
             <button
                 className="tab-button"
                 onClick={onClick}

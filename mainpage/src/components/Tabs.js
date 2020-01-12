@@ -26,8 +26,8 @@ export function Tabs({options, tabs}){
     console.log("tabsToShow:", tabsToShow)
 
     return (
-        <nav className="tabs-nav">
-            <div className="tabs">
+        <div className="tabs">
+            <nav className="tabs-nav">
             {
                 tabsToShow.map(tab => (
                     <Tab
@@ -39,12 +39,12 @@ export function Tabs({options, tabs}){
                     />
                 ))
             }
-            </div>
+            </nav>
             <TabsPanel
             tabs={tabsToShow}
             activeTab={activeTab}
             expanded={options.expanded}
             />
-        </nav>
+        </div>
     )
 }
